@@ -19,19 +19,16 @@
 		</ul>
 		<ul class="navbar-nav ml-auto">
 			{% if app.user %}
-				{# <li class="nav-item">
+				<li class="nav-item">
 					<a class="nav-link" href="{{ path('user_password_change') }}">Changer le mot de passe</a>
 				</li>
 				<li class="nav-item">
 					<a class="nav-link" href="{{ path('app_logout')}}">Déconnexion</a>
 				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="{{ path('user_account_create')}}">Ajouter un utilisateur</a>
-				</li> #}
 			{% else %}
-				{# <li class="nav-item">
+				<li class="nav-item">
 					<a class="nav-link" href="{{ path('app_login')}}">Connexion</a>
-				</li> #}
+				</li>
 			{% endif %}
 		</ul>
 	</div>

@@ -71,7 +71,11 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements P
 
         if (!$user) {
             // fail authentication with a custom error
-            throw new CustomUserMessageAuthenticationException('Cet email est inconnue.');
+            throw new CustomUserMessageAuthenticationException('Cet email est inconnu.');
+        }
+
+        if ($user->getToken()) {
+            throw new CustomUserMessageAuthenticationException('Votre compte n\'est pas activé, verifiez vos mail.');
         }
 
         return $user;

@@ -23,18 +23,20 @@
     <label for="inputPassword">Mot de passe</label>
     <input type="password" name="password" id="inputPassword" class="form-control" required>
 
-    <input
-    type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+    <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
 
-    <div class="checkbox mb-3">
+      <div class="checkbox mb-3">
         <label>
-            <input type="checkbox" name="_remember_me"> Remember me
+          <input type="checkbox" name="_remember_me">
+          Remember me
         </label>
-    </div>
+      </div>
 
-    <button class="btn btn-lg btn-primary" type="submit">
-      Connexion
-    </button>
-    <a class="nav-link" href="{{ path('app_forgot_password_request') }}">Mot de passe oublié</a>
-  </form>
-{% endblock %}
+      <button class="btn btn-lg btn-primary" type="submit">
+        Connexion
+      </button>
+      <a href="{{ path('app_forgot_password_request') }}" class="btn btn-link mt-4">Mot de passe oublié</a>
+
+      <a href="{{ path('user_account_create') }}" class="btn btn-link mt-4">Créer un compte</a>
+    </form>
+  {% endblock %}
