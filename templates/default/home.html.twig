@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+  <div class="jumbotron">
+    <p class="lead">Bienvenu 👍</p>
+    <hr class="my-4">
+    <h2>Prochaine course "{{ nextRound.raceName}}" le {{nextRound.date|date("d/m/Y") }}</h2>
+    <p>Dernier résultat du championnat</p>
+    <h2>{{ lastResult.raceName }}</h2>
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Pilote</th>
+          <th scope="col">Constructeur</th>
+          <th scope="col">Points</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for pilot in lastResult.Results %}
+          <tr>
+            <th scope="row">{{ pilot.position }}</th>
+            <td>{{ pilot.Driver.givenName }}
+              {{ pilot.Driver.familyName }}
+              ({{ pilot.number }})</td>
+            <td>{{ pilot.Constructor.name}}</td>
+            <td>{{ pilot.points}}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    <p>Championnat provisoire</p>
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Pilote</th>
+          <th scope="col">Constructeur</th>
+          <th scope="col">Points</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for pilot in driverStandings %}
+          <tr>
+            <th scope="row">{{ pilot.position }}</th>
+            <td>{{ pilot.Driver.givenName }}
+              {{ pilot.Driver.familyName }}
+              ({{ pilot.Driver.permanentNumber }})</td>
+            <td>{{ pilot.Constructors[0].name}}</td>
+            <td>{{ pilot.points}}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+  </div>
+
+{% endblock %}
