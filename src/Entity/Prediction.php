@@ -78,7 +78,7 @@ class Prediction
     private $tenth;
 
     /**
-     * @ORM\OneToOne(targetEntity=User::class, inversedBy="prediction", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity=User::class, inversedBy="prediction")
      * @ORM\JoinColumn(nullable=false)
      */
     private $user;

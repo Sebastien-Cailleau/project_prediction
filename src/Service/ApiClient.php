@@ -46,8 +46,21 @@ class ApiClient
     $nextRound = $this->getResponse('http://ergast.com/api/f1/current/next.json');
 
     $nextRound = $nextRound['MRData']['RaceTable']['Races'][0];
-    dump($nextRound);
 
     return $nextRound;
+  }
+
+  public function getDrivers()
+  {
+    $driverList = $this->getResponse('http://ergast.com/api/f1/current/drivers.json');
+
+    $driverList = $driverList['MRData']['DriverTable']['Drivers'];
+
+    $drivers = [];
+
+    foreach ($driverList as $driver) {
+      $drivers[$driver['givenName'] . ' ' . $driver['familyName']] = $driver['givenName'] . ' ' . $driver['familyName'];
+    }
+    return $drivers;
   }
 }

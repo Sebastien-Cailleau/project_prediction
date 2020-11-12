@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Prediction;
 use App\Service\ApiClient;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;

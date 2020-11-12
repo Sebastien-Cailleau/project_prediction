@@ -1,0 +1,69 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Prediction
+{% endblock %}
+
+{% block body %}
+  <h1>Prediction</h1>
+
+  <table class="table">
+    <tbody>
+      <tr>
+        <th>Pole</th>
+        <td>{{ prediction.pole }}</td>
+      </tr>
+      <tr>
+        <th>BestLap</th>
+        <td>{{ prediction.bestLap }}</td>
+      </tr>
+      <tr>
+        <th>First</th>
+        <td>{{ prediction.first }}</td>
+      </tr>
+      <tr>
+        <th>Second</th>
+        <td>{{ prediction.second }}</td>
+      </tr>
+      <tr>
+        <th>Third</th>
+        <td>{{ prediction.third }}</td>
+      </tr>
+      <tr>
+        <th>Fourth</th>
+        <td>{{ prediction.fourth }}</td>
+      </tr>
+      <tr>
+        <th>Fifth</th>
+        <td>{{ prediction.fifth }}</td>
+      </tr>
+      <tr>
+        <th>Sixth</th>
+        <td>{{ prediction.sixth }}</td>
+      </tr>
+      <tr>
+        <th>Seventh</th>
+        <td>{{ prediction.seventh }}</td>
+      </tr>
+      <tr>
+        <th>Eighth</th>
+        <td>{{ prediction.eighth }}</td>
+      </tr>
+      <tr>
+        <th>Ninth</th>
+        <td>{{ prediction.ninth }}</td>
+      </tr>
+      <tr>
+        <th>Tenth</th>
+        <td>{{ prediction.tenth }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  {% if app.user.prediction %}
+    <a href="{{ path('prediction_edit', {'id': app.user.prediction.id}) }}">edit</a>
+  {% else %}
+    <a href="{{ path('prediction_new') }}">new</a>
+  {% endif %}
+
+  {{ include('prediction/_delete_form.html.twig') }}
+{% endblock %}

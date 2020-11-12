@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Prediction{% endblock %}
+
+{% block body %}
+    <h1>Edit Prediction</h1>
+
+    {{ include('prediction/_form.html.twig', {'button_label': 'Update'}) }}
+
+<a href="{{ path('prediction_show', {'id': app.user.prediction.id}) }}">back to list</a>
+
+
+    {{ include('prediction/_delete_form.html.twig') }}
+{% endblock %}
