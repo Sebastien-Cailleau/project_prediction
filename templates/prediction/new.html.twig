@@ -1,11 +1,11 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New Prediction{% endblock %}
+{% block title %}Votre pronostic. F1 prediction{% endblock %}
 
 {% block body %}
-    <h1>Create new Prediction</h1>
+    <h1>Votre pronostic</h1>
 
-    {{ include('prediction/_form.html.twig') }}
+{{ include('prediction/_form.html.twig') }}
 
-    <a href="{{ path('prediction_show', {id: app.user.id}) }}">back to list</a>
+    <a href="{{ path('home') }}">Retour à l'acceuil</a>
 {% endblock %}

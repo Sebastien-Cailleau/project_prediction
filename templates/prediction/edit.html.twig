@@ -1,14 +1,30 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit Prediction{% endblock %}
+{% block title %}Modifier votre pronostic. F1 Prediction
+{% endblock %}
 
 {% block body %}
-    <h1>Edit Prediction</h1>
+  <div class="container">
+    <h1 class="text-center mb-6">Modifier votre pronostic</h1>
 
-    {{ include('prediction/_form.html.twig', {'button_label': 'Update'}) }}
-
-<a href="{{ path('prediction_show', {'id': app.user.prediction.id}) }}">back to list</a>
-
-
-    {{ include('prediction/_delete_form.html.twig') }}
+    <div class="row justify-content-around">
+      <div class="col-4">
+        {{ include('prediction/_form.html.twig') }}
+      </div>
+      <div class="col-4">
+        <div class="mb-5">
+          {% if app.user %}
+            <a type="submit" href="{{ path('prediction_show', {'id': app.user.prediction.id}) }}">
+              Retour à votre pronostic
+            </a>
+          {% else %}
+            <a href="{{ path('app_login')}}">Connectez vous</a>
+          {% endif %}
+        </div>
+        <div class="mt-5">
+          {{ include('prediction/_delete_form.html.twig') }}
+        </div>
+      </div>
+    </div>
+  </div>
 {% endblock %}

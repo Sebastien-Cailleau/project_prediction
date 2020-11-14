@@ -1,69 +1,77 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Prediction
+{% block title %}Votre pronostic
+  <small>F1 Prediction</small>
 {% endblock %}
 
 {% block body %}
-  <h1>Prediction</h1>
+<div class="container">
+  <h1 class="text-center">
+    Votre pronostic
+    {% if app.user.prediction %}
+      <a href="{{ path('prediction_edit', {'id': app.user.prediction.id}) }}">
+        <i class="material-icons">edit</i>
+      </a>
+    {% else %}
+      <a href="{{ path('prediction_new') }}">
+        <i class="material-icons">add</i>
+      </a>
+    {% endif %}
+  </h1>
 
-  <table class="table">
-    <tbody>
-      <tr>
-        <th>Pole</th>
-        <td>{{ prediction.pole }}</td>
-      </tr>
-      <tr>
-        <th>BestLap</th>
-        <td>{{ prediction.bestLap }}</td>
-      </tr>
-      <tr>
-        <th>First</th>
-        <td>{{ prediction.first }}</td>
-      </tr>
-      <tr>
-        <th>Second</th>
-        <td>{{ prediction.second }}</td>
-      </tr>
-      <tr>
-        <th>Third</th>
-        <td>{{ prediction.third }}</td>
-      </tr>
-      <tr>
-        <th>Fourth</th>
-        <td>{{ prediction.fourth }}</td>
-      </tr>
-      <tr>
-        <th>Fifth</th>
-        <td>{{ prediction.fifth }}</td>
-      </tr>
-      <tr>
-        <th>Sixth</th>
-        <td>{{ prediction.sixth }}</td>
-      </tr>
-      <tr>
-        <th>Seventh</th>
-        <td>{{ prediction.seventh }}</td>
-      </tr>
-      <tr>
-        <th>Eighth</th>
-        <td>{{ prediction.eighth }}</td>
-      </tr>
-      <tr>
-        <th>Ninth</th>
-        <td>{{ prediction.ninth }}</td>
-      </tr>
-      <tr>
-        <th>Tenth</th>
-        <td>{{ prediction.tenth }}</td>
-      </tr>
-    </tbody>
-  </table>
-
-  {% if app.user.prediction %}
-    <a href="{{ path('prediction_edit', {'id': app.user.prediction.id}) }}">edit</a>
-  {% else %}
-    <a href="{{ path('prediction_new') }}">new</a>
-  {% endif %}
-
-  {{ include('prediction/_delete_form.html.twig') }}
+  <div class="table-responsive mx-auto col-8">
+    <table class="table table-striped">
+      <tbody  class="text-center">
+        <tr>
+          <th>Pole</th>
+          <td>{{ prediction.pole }}</td>
+        </tr>
+        <tr>
+          <th>Meilleur tour</th>
+          <td>{{ prediction.bestLap }}</td>
+        </tr>
+        <tr>
+          <th>Premier</th>
+          <td>{{ prediction.first }}</td>
+        </tr>
+        <tr>
+          <th>Second</th>
+          <td>{{ prediction.second }}</td>
+        </tr>
+        <tr>
+          <th>Troisième</th>
+          <td>{{ prediction.third }}</td>
+        </tr>
+        <tr>
+          <th>Quatrième</th>
+          <td>{{ prediction.fourth }}</td>
+        </tr>
+        <tr>
+          <th>Cinquième</th>
+          <td>{{ prediction.fifth }}</td>
+        </tr>
+        <tr>
+          <th>Sixième</th>
+          <td>{{ prediction.sixth }}</td>
+        </tr>
+        <tr>
+          <th>Septième</th>
+          <td>{{ prediction.seventh }}</td>
+        </tr>
+        <tr>
+          <th>Huitième</th>
+          <td>{{ prediction.eighth }}</td>
+        </tr>
+        <tr>
+          <th>Neuvième</th>
+          <td>{{ prediction.ninth }}</td>
+        </tr>
+        <tr>
+          <th>Dixième</th>
+          <td>{{ prediction.tenth }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
 {% endblock %}

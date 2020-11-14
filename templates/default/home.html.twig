@@ -3,57 +3,90 @@
 {% block body %}
 
   <div class="jumbotron">
-    <p class="lead">Bienvenu 👍</p>
-    <hr class="my-4">
-    <h2>Prochaine course "{{ nextRound.raceName}}" le {{nextRound.date|date("d/m/Y") }}</h2>
-    <p>Dernier résultat du championnat</p>
-    <h2>{{ lastResult.raceName }}</h2>
-    <table class="table">
-      <thead>
-        <tr>
-          <th scope="col">#</th>
-          <th scope="col">Pilote</th>
-          <th scope="col">Constructeur</th>
-          <th scope="col">Points</th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for pilot in lastResult.Results %}
-          <tr>
-            <th scope="row">{{ pilot.position }}</th>
-            <td>{{ pilot.Driver.givenName }}
-              {{ pilot.Driver.familyName }}
-              ({{ pilot.number }})</td>
-            <td>{{ pilot.Constructor.name}}</td>
-            <td>{{ pilot.points}}</td>
-          </tr>
-        {% endfor %}
-      </tbody>
-    </table>
-    <p>Championnat provisoire</p>
-    <table class="table">
-      <thead>
-        <tr>
-          <th scope="col">#</th>
-          <th scope="col">Pilote</th>
-          <th scope="col">Constructeur</th>
-          <th scope="col">Points</th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for pilot in driverStandings %}
-          <tr>
-            <th scope="row">{{ pilot.position }}</th>
-            <td>{{ pilot.Driver.givenName }}
-              {{ pilot.Driver.familyName }}
-              ({{ pilot.Driver.permanentNumber }})</td>
-            <td>{{ pilot.Constructors[0].name}}</td>
-            <td>{{ pilot.points}}</td>
-          </tr>
-        {% endfor %}
-      </tbody>
-    </table>
+    <h1 class="display-4">Formula One Prediction 🏎️</h1>
 
+    <p class="lead">Bienvenue, vous êtes fan de F1 ? Vous êtes au bon endroit 😃</p>
+
+    <hr class="my-4">
+    <p>Ici vous pourrez faire vos pronostic et vous mesurez à d'autre fan, juste pour le fun !</p>
+    {% if not app.user %}
+      <p class="lead">
+        <a class="btn btn-info btn-lg" href="{{ path('app_login') }}">Connectez vous
+          <small>ou inscrivez vous</small>
+        </a>
+      </p>
+    {% else %}
+      <p class="lead">
+        {% if app.user.prediction %}
+          <a class="btn btn-info btn-lg" href="{{ path('prediction_show', {id: app.user.prediction.id })}}">Votre pronostic</a>
+        {% else %}
+          <a class="btn btn-info btn-lg" href="{{ path('prediction_new') }}">Votre pronostic</a>
+        {% endif %}
+      </p>
+    {% endif %}
+    <hr class="my-4">
+    <h2 class="lead">Prochaine course "{{ nextRound.raceName}}" dans <span class="text-info" id="countDown"></span> </h2>
+  </div>
+  <div class="container-fluid mt-5">
+    <div class="row justify-content-around">
+      <div class="col-auto">
+        <h2 class="text-center p-3 mb-2 bg-info text-white rounded">Dernière course</h2>
+        <h4 class="text-info">{{ lastResult.raceName }}</h4>
+        <div class="table-responsive-md">
+          <table class="table table-striped">
+            <thead class="thead">
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Pilote</th>
+                <th scope="col">Constructeur</th>
+                <th scope="col">Points</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for pilot in lastResult.Results %}
+                <tr>
+                  <th scope="row">{{ pilot.position }}</th>
+                  <td>{{ pilot.Driver.givenName }}
+                    {{ pilot.Driver.familyName }}
+                    ({{ pilot.number }})</td>
+                  <td>{{ pilot.Constructor.name}}</td>
+                  {% if pilot.points > 0 %}
+                    <td>{{ pilot.points}}</td>
+                  {% else %}
+                    <td>Abandon</td>
+                  {% endif %}
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="col-auto">
+        <h2 class="text-center p-3 mb-2 bg-info text-white rounded">Classement pilotes</h2>
+        <table class="table  table-striped">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Pilote</th>
+              <th scope="col">Constructeur</th>
+              <th scope="col">Points</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for pilot in driverStandings %}
+              <tr>
+                <th scope="row">{{ pilot.position }}</th>
+                <td>{{ pilot.Driver.givenName }}
+                  {{ pilot.Driver.familyName }}
+                  ({{ pilot.Driver.permanentNumber }})</td>
+                <td>{{ pilot.Constructors[0].name}}</td>
+                <td>{{ pilot.points}}</td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
   </div>
 
 {% endblock %}

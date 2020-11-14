@@ -85,6 +85,6 @@ class PredictionController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('prediction_show', ['id' => $prediction->getId()]);
+        return $this->redirectToRoute('home');
     }
 }

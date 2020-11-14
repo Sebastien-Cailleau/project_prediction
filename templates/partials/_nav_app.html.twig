@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-warning mb-5">
+<nav class="navbar navbar-expand-lg navbar-light bg-info mb-5">
   <a class="navbar-brand  mb-0 h1" href="{{ path('home') }}">
     <i class="fas fa-flag-checkered"></i>
     Formula One Prediction
@@ -14,28 +14,30 @@
       <li class="nav-item">
         <a class="nav-link" href=""></a>
       </li>
+      {% if app.user %}
       {% if app.user.prediction %}
-        <li class="nav-item">
-          <a class="nav-link" href="{{ path('prediction_show', {id: app.user.prediction.id })}}">Votre pronostic</a>
-        </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{{ path('prediction_show', {id: app.user.prediction.id })}}">Votre pronostic</a>
+      </li>
       {% else %}
-        <li class="nav_item">
-          <a href="{{ path('prediction_new') }}">new</a>
-        </li>
+      <li class="nav_item">
+        <a class="nav-link" href="{{ path('prediction_new') }}">Votre pronostic</a>
+      </li>
+      {% endif %}
       {% endif %}
     </ul>
     <ul class="navbar-nav ml-auto">
       {% if app.user %}
-        <li class="nav-item">
-          <a class="nav-link" href="{{ path('user_password_change') }}">Changer le mot de passe</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{{ path('app_logout')}}">Déconnexion</a>
-        </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{{ path('user_password_change') }}">Changer le mot de passe</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{{ path('app_logout')}}">Déconnexion</a>
+      </li>
       {% else %}
-        <li class="nav-item">
-          <a class="nav-link" href="{{ path('app_login')}}">Connexion</a>
-        </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{{ path('app_login')}}">Connexion</a>
+      </li>
       {% endif %}
     </ul>
   </div>
