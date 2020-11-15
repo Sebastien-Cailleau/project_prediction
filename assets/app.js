@@ -18,13 +18,14 @@ import './styles/app.css'
 
 // _____________________________________check for next Race_____________________________
 
-let nextRace = document.getElementById('nextRace')
-console.log(nextRace.innerHTML)
-let nextRaceDate = new Date(nextRace.innerHTML)
-console.log(nextRaceDate)
+let nextRaceDiv = document.getElementById('nextRace')
+let nextRaceDate = new Date(nextRaceDiv.innerHTML)
 let currentDate = new Date()
-let countdownInterval = nextRaceDate - currentDate
-console.log(countdownInterval)
+let countdownInterval = (nextRaceDate - currentDate) / 1000
+let daysCount = Math.floor(countdownInterval / 86400)
+let hoursCount = Math.floor((countdownInterval - daysCount * 86400) / 3600) % 86400
+let minutesCount = Math.floor((countdownInterval - daysCount * 86400 - hoursCount * 3600) / 60) % 3600
+let secondsCount = Math.floor(countdownInterval - daysCount * 86400 - hoursCount * 3600 - minutesCount * 60)
 
 // _____________________________________CounDown________________________________________
 
@@ -49,10 +50,10 @@ let Countdown = {
 
     // Init countdown values
     this.values = {
-      days: this.$.days.parent().attr('data-init-value'),
-      hours: this.$.hours.parent().attr('data-init-value'),
-      minutes: this.$.minutes.parent().attr('data-init-value'),
-      seconds: this.$.seconds.parent().attr('data-init-value'),
+      days: daysCount,
+      hours: hoursCount,
+      minutes: minutesCount,
+      seconds: secondsCount,
     }
 
     // Initialize total seconds

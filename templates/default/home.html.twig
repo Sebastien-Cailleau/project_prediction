@@ -25,8 +25,8 @@
       </p>
     {% endif %}
     <hr class="my-4">
+    <div id="nextRace" class="nextRace" style="display: none;">{{ nextRound.date  ~ " " ~ nextRound.time }}</div>
     <h2 class="lead text-center mb-4">Prochaine course "{{ nextRound.raceName}}" dans :</h2>
-    <p id="nextRace">{{ nextRound.date  ~ " " ~ nextRound.time }}</p>
     <div class="countdown">
       <div class="bloc-time days" data-init-value="2">
         <span class="count-title">Days</span>
@@ -133,15 +133,44 @@
       </div>
     </div>
   </div>
-</div>
-<div class="container-fluid mt-5">
-  <div class="row justify-content-around">
-    <div class="col-auto">
-      <h2 class="text-center p-3 mb-2 bg-info text-white rounded">Dernière course</h2>
-      <h4 class="text-info">{{ lastResult.raceName }}</h4>
-      <div class="table-responsive-md">
-        <table class="table table-striped">
-          <thead class="thead">
+  <div class="container-fluid mt-5">
+    <div class="row justify-content-around">
+      <div class="col-auto">
+        <h2 class="text-center p-3 mb-2 bg-info text-white rounded">Dernière course</h2>
+        <h4 class="text-info">{{ lastResult.raceName }}</h4>
+        <div class="table-responsive-md">
+          <table class="table table-striped">
+            <thead class="thead">
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Pilote</th>
+                <th scope="col">Constructeur</th>
+                <th scope="col">Points</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for pilot in lastResult.Results %}
+                <tr>
+                  <th scope="row">{{ pilot.position }}</th>
+                  <td>{{ pilot.Driver.givenName }}
+                    {{ pilot.Driver.familyName }}
+                    ({{ pilot.number }})</td>
+                  <td>{{ pilot.Constructor.name}}</td>
+                  {% if pilot.positionText is same as 'R' %}
+                    <td>Abandon</td>
+                  {% else %}
+                    <td>{{ pilot.points}}</td>
+                  {% endif %}
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="col-auto">
+        <h2 class="text-center p-3 mb-2 bg-info text-white rounded">Classement pilotes</h2>
+        <table class="table  table-striped">
+          <thead>
             <tr>
               <th scope="col">#</th>
               <th scope="col">Pilote</th>
@@ -150,48 +179,19 @@
             </tr>
           </thead>
           <tbody>
-            {% for pilot in lastResult.Results %}
+            {% for pilot in driverStandings %}
               <tr>
                 <th scope="row">{{ pilot.position }}</th>
                 <td>{{ pilot.Driver.givenName }}
                   {{ pilot.Driver.familyName }}
-                  ({{ pilot.number }})</td>
-                <td>{{ pilot.Constructor.name}}</td>
-                {% if pilot.points > 0 %}
-                  <td>{{ pilot.points}}</td>
-                {% else %}
-                  <td>Abandon</td>
-                {% endif %}
+                  ({{ pilot.Driver.permanentNumber }})</td>
+                <td>{{ pilot.Constructors[0].name}}</td>
+                <td>{{ pilot.points}}</td>
               </tr>
             {% endfor %}
           </tbody>
         </table>
       </div>
     </div>
-    <div class="col-auto">
-      <h2 class="text-center p-3 mb-2 bg-info text-white rounded">Classement pilotes</h2>
-      <table class="table  table-striped">
-        <thead>
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">Pilote</th>
-            <th scope="col">Constructeur</th>
-            <th scope="col">Points</th>
-          </tr>
-        </thead>
-        <tbody>
-          {% for pilot in driverStandings %}
-            <tr>
-              <th scope="row">{{ pilot.position }}</th>
-              <td>{{ pilot.Driver.givenName }}
-                {{ pilot.Driver.familyName }}
-                ({{ pilot.Driver.permanentNumber }})</td>
-              <td>{{ pilot.Constructors[0].name}}</td>
-              <td>{{ pilot.points}}</td>
-            </tr>
-          {% endfor %}
-        </tbody>
-      </table>
-    </div>
   </div>
-</div>{% endblock %}
+{% endblock %}
